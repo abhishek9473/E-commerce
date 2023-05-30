@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .button {
+        @apply cursor-pointer h-10 w-32 flex justify-center items-center rounded-md font-semibold 
+    }
+
+    .blue-effect{
+        @apply text-white bg-blue-primary hover:bg-blue-secondry
+    }
+
+    .green-effect{
+        @apply text-white bg-green-primary hover:bg-green-secondry
+    }
+
+    .red-effect{
+        @apply text-white bg-red-primary hover:bg-red-secondry
+    }
+
+    
+    .cardImage {
+        @apply h-full w-full
+    }
+
+    .addCartButton {
+        @apply bg-blue-primary hover:bg-blue-secondry py-2 px-5 text-white font-semibold rounded-md
+    }
+   
+
+    .add-cart-button {
+        @apply bg-red-primary w-5/6 h-9 rounded-md hover:bg-red-secondry text-white font-semibold
+    }
+
+    .card-hover-style {
+        @apply hover:text-blue-600 cursor-pointer hover:border-blue-primary
+    }
+/* ///////////////////////////////////////////////////////// */
+
+
+/* // */
+    .categoryWiseProductCardLayout {
+        /* background-color: #81f0cb; */
+        @apply  px-7 py-2 border border-gray-400 h-[17rem]
+    }
+
+    .categoryWiseProductCardContent {
+        @apply text-center text-xl font-semibold mt-2
+    }
+
+    .priceCardBody {
+        @apply m-1 p-1 h-[21rem] border border-gray-400 flex flex-col cursor-pointer justify-around
+    }
+
+    .priceCardImageBody {
+        @apply h-3/5 flex justify-center
+    }
+
+    .priceCardImageData {
+        @apply h-full
+    }
+    .product-sectiom-body {
+        @apply p-2 bg-slate-200 shadow
+    }
+    .product-section-caption {
+        @apply text-center text-2xl font-semibold my-2
+    }
+
+   
+
+}
