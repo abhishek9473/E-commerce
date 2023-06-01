@@ -8,13 +8,7 @@ const { authUser, authAdmin } = require("../middleware/auth");
 // //               -----------------------------------------------
 // // example :: https://localhost:3000/users/...
 
-// userRouter.get("/",auth, userController.getAllUsers);
-
-// userRouter.get("/", (req, res) => {
-//   res.send("route without auth work");
-// });
 userRouter.get("/", authAdmin, (req, res) => {
-  // userRouter.get("/",authUser, (req, res) => {
   const name = req.userNameByToken;
   const role = req.userRole;
   res.send({
@@ -26,3 +20,6 @@ userRouter.get("/", authAdmin, (req, res) => {
 });
 
 module.exports = userRouter;
+
+
+// this file is not in use

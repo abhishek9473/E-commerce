@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout";
 import AllCategorySection from "@/components/pageSection/AllCategorySection";
 
 export default function Home() {
+  console.log("home page load")
   return (
     <>
       <BaseLayout pageTitle="Home">

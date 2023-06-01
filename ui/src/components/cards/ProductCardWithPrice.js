@@ -2,7 +2,6 @@ import React from "react";
 
 function ProductCardWithPrice({ item, click }) {
   const clickHandler = (productId) => {
-    console.log("item", item);
     click ? click(productId) : null;
   };
   return (

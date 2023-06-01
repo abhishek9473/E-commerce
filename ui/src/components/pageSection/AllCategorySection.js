@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import AllItemBox from "../sections/AllItemBox";
+import AllItemBox from "../componentSections/AllItemBox";
 import AllCategoriesCard from "../cards/AllCategoriesCard";
 import { getAllCategoryFromDb } from "@/services/api-services";
 
@@ -37,6 +37,13 @@ export default function AllCategorySection() {
     <>
       <AllItemBox caption={"Categories"}>
         {/* map of all avilable categories in a card */}
+        <div className="p-4 text-center font-bold text-2xl" >
+          <div className="flex flex-col justify-between h-1/2">
+            <span>shop</span>
+            <span>by</span>
+            <span> categories</span>
+          </div>
+        </div>
         {allCategoryData.map((item) => (
           <AllCategoriesCard click={nextPage} item={item} />
         ))}

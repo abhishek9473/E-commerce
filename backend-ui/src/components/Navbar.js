@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import PopoverComponent from "./element/Popover";
 import ProfileContent from "./user/ProfileContent";
-import { testData } from "@/services/api-services";
 import { getUserName } from "@/services/identity";
 
 function Navbar() {
@@ -59,9 +58,6 @@ function Navbar() {
           {/* search menu end */}
           {/* user name , info and more + cart menu start here */}
           <div className="cursor-pointer focus:outline-none text-navbarTextLight font-semibold">
-
-            
-
             <PopoverComponent buttonlevel={newName}>
               <ProfileContent />
             </PopoverComponent>

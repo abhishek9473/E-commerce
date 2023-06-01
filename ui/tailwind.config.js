@@ -36,6 +36,10 @@ module.exports = {
           primary: "#ed374e",
           secondry: "#f0596c",
         },
+        orange: {
+          primary: "#e66407",
+          secondry: "#eb7e31",
+        },
         green: {
           primary: "#0fab91",
           secondry: "#0fabab",

@@ -1,17 +1,60 @@
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import React from "react";
+import Image from "next/image";
+import Modal from "../elements/Modal";
+import LoginForm from "../form/LoginForm";
+import SignupForm from "../form/SignupForm";
+import { getAuth, getUserName } from "@/services/identity";
+import PopoverComponent from "../elements/Popover";
+import ProfileContent from "../childrens/ProfileContent";
 
 function Navbar() {
+  const [loginFormOpen, setLoginFormOpen] = useState(false);
+  const [loginOrSignupValue, setLoginOrSignupValue] = useState(true);
+  const [userLoginValue, setUserLoginValue] = useState(null);
+
   const router = useRouter();
+
+  // check user login or not
+  useEffect(() => {
+    const LoginValue = getAuth() && getUserName() ? true : false;
+    setUserLoginValue(LoginValue);
+  }, []);
+
+  console.log("login", userLoginValue);
+  // const userNameOriginal = userLoginValue ? getUserName() : "Login";
+  // const userName = userLoginValue ? getUserName() : "Login";
+
+  const userNameForDisplay = () => {
+    const name = getUserName();
+    const capitalName = name.charAt(0).toUpperCase() + name.slice(1);
+    return capitalName;
+  };
+
+  const modalDataChanger = () => {
+    setLoginOrSignupValue(!loginOrSignupValue);
+  };
+
+  const loginFormHandler = () => {
+    setLoginFormOpen(true);
+  };
+  const modalCloseHandler = () => {
+    setLoginFormOpen(false);
+    setTimeout(() => {
+      setLoginOrSignupValue(true);
+    }, 200);
+  };
 
   return (
     <>
       <div className=" px-1 py-1 bg-blue-primary sticky top-0">
         <div className=" lg:px-24 px-12 flex items-center justify-between ">
           {/* logo pic and name handler start */}
-          <div className="pr-8" onClick={() => router.push("/")}>
-            <Image src={"/navbar/navbar_logo.png"} height={45} width={100} />
+          {/* <div className="pr-8" onClick={() => router.push("/")}> */}
+          <div className="pr-8">
+            <a href={"/"}>
+              <Image src={"/navbar/navbar_logo.png"} height={45} width={100} />
+            </a>
           </div>
           {/* logo pic and name handler end */}
 
@@ -45,12 +88,36 @@ function Navbar() {
           {/* search menu end */}
           {/* user name , info and more + cart menu start here */}
           <div className="flex basis-1/2 justify-around  text-white font-semibold">
-            <div className="cursor-pointer">
-              <div>Login</div>
-            </div>
-            <div className="cursor-pointer">
-              <div>More</div>
-            </div>
+            {!userLoginValue ? (
+              <>
+                {/* div for login and signup handler /// (before login)  */}
+                <div className="cursor-pointer">
+                  <div
+                    onClick={loginFormHandler}
+                    className="border border-white px-4"
+                  >
+                    Login
+                  </div>
+                  <Modal isOpen={loginFormOpen} onClose={modalCloseHandler}>
+                    {loginOrSignupValue ? (
+                      <LoginForm change={modalDataChanger} />
+                    ) : (
+                      <SignupForm change={modalDataChanger} />
+                    )}
+                  </Modal>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* profile content // (after login) */}
+                <div className="cursor-pointer">
+                  <PopoverComponent buttonlevel={userNameForDisplay()}>
+                    <ProfileContent />
+                  </PopoverComponent>
+                </div>
+              </>
+            )}
+
             <div className="cursor-pointer">
               <div>About us</div>
             </div>
