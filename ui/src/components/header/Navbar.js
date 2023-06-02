@@ -7,9 +7,10 @@ import SignupForm from "../form/SignupForm";
 import { getAuth, getUserName } from "@/services/identity";
 import PopoverComponent from "../elements/Popover";
 import ProfileContent from "../childrens/ProfileContent";
+import Link from "next/link";
 
 function Navbar() {
-  const [loginFormOpen, setLoginFormOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [loginOrSignupValue, setLoginOrSignupValue] = useState(true);
   const [userLoginValue, setUserLoginValue] = useState(null);
 
@@ -19,6 +20,14 @@ function Navbar() {
   useEffect(() => {
     const LoginValue = getAuth() && getUserName() ? true : false;
     setUserLoginValue(LoginValue);
+  }, []);
+
+  useEffect(() => {
+    if (!userLoginValue) {
+      setTimeout(() => {
+        setLoginModalOpen(true);
+      }, 200);
+    }
   }, []);
 
   console.log("login", userLoginValue);
@@ -36,10 +45,10 @@ function Navbar() {
   };
 
   const loginFormHandler = () => {
-    setLoginFormOpen(true);
+    setLoginModalOpen(true);
   };
   const modalCloseHandler = () => {
-    setLoginFormOpen(false);
+    setLoginModalOpen(false);
     setTimeout(() => {
       setLoginOrSignupValue(true);
     }, 200);
@@ -52,9 +61,9 @@ function Navbar() {
           {/* logo pic and name handler start */}
           {/* <div className="pr-8" onClick={() => router.push("/")}> */}
           <div className="pr-8">
-            <a href={"/"}>
+            <Link href={"/"}>
               <Image src={"/navbar/navbar_logo.png"} height={45} width={100} />
-            </a>
+            </Link>
           </div>
           {/* logo pic and name handler end */}
 
@@ -63,13 +72,14 @@ function Navbar() {
           <div class="relative basis-1/2  w-full ">
             <div className="flex items-center  ">
               <input
+                readOnly
                 type="text"
                 placeholder="Search a product,brand and more"
                 class="w-full px-4 py-1 border border-gray-300 shadow-sm focus:outline-none"
               />
               <div
                 class="absolute right-0 mr-6"
-                onClick={() => alert("icon clicked")}
+                // onClick={() => alert("icon clicked")}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -98,7 +108,7 @@ function Navbar() {
                   >
                     Login
                   </div>
-                  <Modal isOpen={loginFormOpen} onClose={modalCloseHandler}>
+                  <Modal isOpen={loginModalOpen} onClose={modalCloseHandler}>
                     {loginOrSignupValue ? (
                       <LoginForm change={modalDataChanger} />
                     ) : (
