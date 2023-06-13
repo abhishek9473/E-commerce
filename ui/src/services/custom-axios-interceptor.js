@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { getAuth } from "./identity";
+import { getAuth } from "./identity";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,7 +14,7 @@ const customAxiosInterceptor = axios.create({
 
 const requestHandler = (request) => {
   // const auth = typeof window !== "undefined" ? getAuth() : null;
-  const auth = typeof window !== "undefined" ? null : null;
+  const auth = typeof window !== "undefined" ? getAuth() : null;
   if (auth) {
     request.headers = { ...request.headers, "x-access-token": auth };
   }
@@ -28,22 +28,22 @@ const responseHandler = (response) => {
   return response;
 };
 
-const errorHandler = (error) => {
+const errorHandler = (error, type) => {
   // if (error.response.status === 401 || error.response.status === 403) {
   //     // removeAuth();
   // }
-  console.log("api error in customAxiosInterceptor page", error);
+  console.log("api error in customAxiosInterceptor page", type, error);
   return Promise.reject(error);
 };
 
 customAxiosInterceptor.interceptors.request.use(
   (request) => requestHandler(request),
-  (error) => errorHandler(error)
+  (error) => errorHandler(error, "reqest error")
 );
 
 customAxiosInterceptor.interceptors.response.use(
   (response) => responseHandler(response),
-  (error) => errorHandler(error)
+  (error) => errorHandler(error, "responce error")
 );
 
 export default customAxiosInterceptor;

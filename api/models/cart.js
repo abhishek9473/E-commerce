@@ -3,9 +3,10 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
     // change model name
-    // static associate(models){
-    //   Cart.hasMany(models.Task, { foreignKey: "CartId" });
-    // }
+    static associate(models) {
+      // Cart.belongsTo(models.User, { foreignKey: "userId" });
+      Cart.belongsTo(models.Product, { foreignKey: "productId" });
+    }
   }
 
   Cart.init(
@@ -29,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       productQty: { type: DataTypes.INTEGER, allowNull: false },
-      productPrice: { type: DataTypes.FLOAT, allowNull: false },
     },
     {
       sequelize,

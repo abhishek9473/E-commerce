@@ -1,17 +1,39 @@
 import BaseLayout from "@/layouts/BaseLayout";
-import { getProductByIdFromDb } from "@/services/api-services";
+import {
+  addProductInCartDb,
+  checkProductInCartDb,
+  getProductByIdFromDb,
+} from "@/services/api-services";
+import { getAuth, getUserName } from "@/services/identity";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 function index() {
   const [product, setProduct] = useState([]);
   const [pageReady, setPageReady] = useState(false);
+  const [productAlreadyInCart, setProductAlreadyInCart] = useState(false);
 
   const router = useRouter();
   const query = router.query;
   const categoryName = query.productType;
   const productId = query.pid;
 
+  useEffect(() => {
+    const LoginValue = getAuth() && getUserName() ? true : false;
+    if (LoginValue) {
+      const data = { productId: productId };
+      checkProductInCartDb(data)
+        .then((responce) => {
+          if (responce.status) {
+            console.log("mm", responce);
+            setProductAlreadyInCart(true);
+          }
+        })
+        .catch((error) => console.log("check product in cart error", error));
+    }
+  }, [productId]);
+
+  // api call and show a single product for display in page
   useEffect(() => {
     getProductByIdFromDb(productId)
       .then((responce) => {
@@ -24,6 +46,20 @@ function index() {
       })
       .catch((error) => console.log("product id error", error));
   }, [productId]);
+
+  // api call for add product in cart in database
+  const addToCartHandler = (pageProductId) => {
+    const data = { productId: pageProductId };
+    addProductInCartDb(data)
+      .then((responce) => {
+        if (responce.status) {
+          setProductAlreadyInCart(true);
+        } else {
+          console.log(responce.entity);
+        }
+      })
+      .catch((error) => console.log("error in add product to cart", error));
+  };
 
   const brandName = product?.brandName;
   const newBrandName =
@@ -85,7 +121,21 @@ function index() {
                 </div>
 
                 <div className="pb-3 pl-3">
-                  <button className="addCartButton">Add to cart</button>
+                  {productAlreadyInCart ? (
+                    <button
+                      className="gotoCartButton"
+                      onClick={() => router.push("/viewCart")}
+                    >
+                      Go to Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addToCartHandler(product?.id)}
+                      className="addCartButton"
+                    >
+                      Add to cart
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

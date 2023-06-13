@@ -21,5 +21,6 @@ app.post("/loginAdmin", loginController.loginAdmin);
 app.use("/users", require("./userRouter"));
 app.use("/category", require("./categoryRouter"));
 app.use("/product", require("./productRouter"));
+app.use("/viewCart", require("./cartRouter"));
 
 module.exports = app;
