@@ -25,7 +25,6 @@ function index() {
       checkProductInCartDb(data)
         .then((responce) => {
           if (responce.status) {
-            console.log("mm", responce);
             setProductAlreadyInCart(true);
           }
         })

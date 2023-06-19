@@ -10,7 +10,7 @@ function ProductCardWithPrice({ item, click }) {
         <div className="priceCardBody card-hover-style">
           <div className="priceCardImageBody">
             <img
-              className="priceCardImageData "
+              className="priceCardImageData"
               src={item.imageSrc}
               alt="product image"
             />

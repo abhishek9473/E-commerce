@@ -28,8 +28,8 @@ export const getAllCartItemsFromDb = () => {
 };
 
 export const checkProductInCartDb = (data) => {
-  return post(`${apiUrl}/viewCart/checkProductInCart`,data)
-}
+  return post(`${apiUrl}/viewCart/checkProductInCart`, data);
+};
 
 export const updateProductQtyInCartDb = (cartId, productQty) => {
   return put(`${apiUrl}/viewCart/updateCart/${cartId}`, productQty);
@@ -42,3 +42,14 @@ export const addProductInCartDb = (newProductId) => {
 export const deleteProductInCartDb = (cartId) => {
   return destroy(`${apiUrl}/viewCart/deleteItem/${cartId}`);
 };
+
+// user-order table entry
+
+export const addOrderInDb = (newOrder) => {
+  return post(`${apiUrl}/userOrder/addOrder`, newOrder);
+};
+
+// show orders
+export const getAllOrdersFromDb = () => {
+  return get(`${apiUrl}/orderHistory/all`)
+}

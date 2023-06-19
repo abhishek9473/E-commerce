@@ -1,11 +1,12 @@
+import Link from "next/link";
 import React from "react";
 
 export default function CartPriceDetailCard({
-  totalItems = 3,
-  mrp = 23500,
-  discount = 13000,
+  totalItems,
+  mrp,
+  discount,
   deliveryCharge = 0,
-  totalAmmount = 10500,
+  totalAmmount,
 }) {
   return (
     <>
@@ -21,7 +22,7 @@ export default function CartPriceDetailCard({
                 <span>
                   MRP{" "}
                   <span className="text-sm text-textGray">
-                    ({totalItems} items)
+                    ({totalItems} {totalItems == 1 ? "item" : "items"})
                   </span>
                 </span>
                 <span>₹ {mrp}</span>
@@ -44,9 +45,11 @@ export default function CartPriceDetailCard({
 
           {/* check out button */}
           <div className="flex justify-center pt-8">
-            <button className="bg-green-primary px-2 w-64 rounded-md text-white font-medium py-1">
-              Place Order
-            </button>
+            <Link href="/checkout">
+              <button className="bg-green-primary px-2 w-64 rounded-md text-white font-medium py-1">
+                Proceed to Buy
+              </button>
+            </Link>
           </div>
           {/* check out button end */}
         </div>

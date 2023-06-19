@@ -3,9 +3,9 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class UserOrder extends Model {
     // change model name
-    // static associate(models){
-    //   UserOrder.hasMany(models.Task, { foreignKey: "UserOrderId" });
-    // }
+    static associate(models){
+      UserOrder.hasMany(models.OrderDetail, { foreignKey: "orderId" });
+    }
   }
 
   UserOrder.init(

@@ -42,6 +42,7 @@ const viewCart = async (req, res) => {
 };
 
 const checkInCart = async (req, res) => {
+  // check product already added in cart or not , for display in product page
   try {
     const targetUserId = req.userIdByToken;
     const targetProductId = req.body.productId;

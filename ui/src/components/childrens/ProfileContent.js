@@ -12,12 +12,16 @@ function ProfileContent() {
     router.reload();
   };
 
+  const orderPageHandler = ()=> {
+    router.push("/account/orderHistory")
+  }
+
   return (
     <>
       <div className="border font-normal">
-        <div className=" py-3 pl-5 hover:bg-secondry">My Profile</div>
-        <div className=" py-3 pl-5 hover:bg-secondry">Orders</div>
-        <div className=" py-3 pl-5 hover:bg-secondry">Activity log</div>
+        {/* <div className=" py-3 pl-5 hover:bg-secondry">My Profile</div> */}
+        <div className=" py-3 pl-5 hover:bg-secondry" onClick={orderPageHandler} >Orders</div>
+        {/* <div className=" py-3 pl-5 hover:bg-secondry">Activity log</div> */}
         <div className=" py-3 pl-5 hover:bg-secondry" onClick={logoutHandler}>
           Logout
         </div>
