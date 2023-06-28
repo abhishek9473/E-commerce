@@ -11,7 +11,4 @@ const { authUser } = require("../middleware/auth");
 
 userOrderRouter.post("/addOrder", authUser, userOrderController.createOrder);
 
-// userOrderRouter.get("/", authUser, cartController.viewCart);
-// userOrderRouter.post("/checkProductInCart", authUser, cartController.checkInCart);
-
 module.exports = userOrderRouter;

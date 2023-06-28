@@ -1,6 +1,5 @@
 const express = require("express");
-const orderHistory = express.Router();
-// const productController = require("../controllers/productController");
+const orderHistoryrouter = express.Router();
 const { authUser, authAdmin } = require("../middleware/auth");
 const orderHistoryController = require("../controllers/orderHistoryController");
 
@@ -10,6 +9,6 @@ const orderHistoryController = require("../controllers/orderHistoryController");
 
 // // example :: https://localhost:3000/orderHistory/...
 
-orderHistory.get("/all", authUser, orderHistoryController.allOrders);
+orderHistoryrouter.get("/all", authUser, orderHistoryController.allOrders);
 
-module.exports = orderHistory;
+module.exports = orderHistoryrouter;

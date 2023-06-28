@@ -59,7 +59,6 @@ const allProducts = async (req, res) => {
 const ProductsByCategory = async (req, res) => {
   try {
     const targetCategoryId = req.params.id;
-    // console.log("check", targetCategoryId);
     if (targetCategoryId) {
       let data = await Product.findAll({
         where: { categoryId: targetCategoryId },
@@ -87,7 +86,6 @@ const ProductsByCategory = async (req, res) => {
 const singleProductbyId = async (req, res) => {
   try {
     const targetProductId = req.params.id;
-    // console.log("check", targetCategoryId);
     if (targetProductId) {
       let data = await Product.findAll({
         where: { id: targetProductId },
@@ -129,7 +127,6 @@ const updateProduct = async (req, res) => {
             where: {
               id: targetId,
             },
-            // returning: true,
           }
         );
         res.send({

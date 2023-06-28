@@ -66,7 +66,6 @@ const loginUser = async (req, res) => {
         const token = jwt.sign(
           { id: user.id, email: user.email, name: user.name, role: user.role },
           secret
-          // {expiresIn : "25s"}
         );
         res.send({
           status: true,
@@ -112,7 +111,6 @@ const loginAdmin = async (req, res) => {
               role: user.role,
             },
             secret
-            // {expiresIn : "25s"}
           );
           res.send({
             status: true,
@@ -147,29 +145,8 @@ const loginAdmin = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
-  try {
-    const targetId = req.params.id;
-    console.log("aaaaaa", targetId);
-
-    await User.destroy({
-      where: { id: targetId },
-    });
-    res.send({
-      status: true,
-      entity: "deleted",
-    });
-  } catch (error) {
-    res.send({
-      status: false,
-      entity: error,
-    });
-  }
-};
-
 module.exports = {
   addUser,
   loginUser,
   loginAdmin,
-  deleteUser,
 };

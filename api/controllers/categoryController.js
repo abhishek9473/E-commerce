@@ -59,18 +59,13 @@ const updateCategory = async (req, res) => {
         id: targetId,
       },
     });
-    // Object.assign(category, req.body);
-    //  category.save();
 
-    // console.log("database",req.body,targetId)
-    // if (!existingCategory) {
     await Category.update(
       { ...req.body },
       {
         where: {
           id: targetId,
         },
-        // returning: true,
       }
     );
 
@@ -78,12 +73,6 @@ const updateCategory = async (req, res) => {
       status: true,
       entity: "Updated successful",
     });
-    // } else {
-    //   res.send({
-    //     status: false,
-    //     entity: "category name already exist, please chose another one",
-    //   });
-    // }
   } catch (error) {
     res.send({
       status: false,

@@ -38,7 +38,7 @@ const errorHandler = (error, type) => {
 
 customAxiosInterceptor.interceptors.request.use(
   (request) => requestHandler(request),
-  (error) => errorHandler(error, "reqest error")
+  (error) => errorHandler(error, "request error")
 );
 
 customAxiosInterceptor.interceptors.response.use(

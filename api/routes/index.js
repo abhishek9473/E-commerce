@@ -16,13 +16,11 @@ app.get("/", (req, res) => {
 app.post("/signup", loginController.addUser);
 app.post("/login", loginController.loginUser);
 app.post("/loginAdmin", loginController.loginAdmin);
-// app.delete("/delete/:id", loginController.deleteUser);
 
-app.use("/users", require("./userRouter"));
 app.use("/category", require("./categoryRouter"));
 app.use("/product", require("./productRouter"));
 app.use("/viewCart", require("./cartRouter"));
 app.use("/userOrder", require("./userOrderRouter"));
-app.use("/orderHistory", require("./orderHistory"));
+app.use("/orderHistory", require("./orderHistoryRouter"));
 
 module.exports = app;
